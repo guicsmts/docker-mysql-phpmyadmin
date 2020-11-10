@@ -1,0 +1,43 @@
+version: '3'
+services:
+    db:
+        image: mysql:5.7.22
+        container_name: srv-mysql-00
+        restart: always
+        ports: 
+            - "3306:3306"    
+        environment: 
+            MYSQL_DATABASE: 9c34c5c45c35c23c44c523c45c234
+            MYSQL_ROOT_PASSWORD: 3423424%%sda%%dN    
+            MYSQL_USER: admin
+            MYSQL_PASSWORD: admin
+        volumes:
+            - ./mounts/mysql:/var/lib/mysql
+        networks: 
+            vnet-production:
+                ipv4_address: 172.10.1.10 
+
+    web:
+        build: ./build/ubuntu/
+        container_name: srv-web-00
+        restart: always
+        ports: 
+            - "80:80"
+            - "443:443"
+        command: nginx -g "daemon off;"   
+        volumes: 
+            - ./mounts/myapp/config/nginx/default:/etc/nginx/sites-available/default
+            - ./mounts/myapp/config/phpmyadmin/config-db.php:/etc/phpmyadmin/
+
+        depends_on: 
+            - db    
+        networks: 
+            vnet-production:
+                ipv4_address: 172.10.1.20    
+                  
+networks: 
+    vnet-production:
+        driver: bridge
+        ipam:
+            config:
+                - subnet: 172.10.1.0/24
