@@ -17,12 +17,13 @@ RUN apt-get install -y \
 
 
 #
+
 RUN ln -s /usr/share/phpmyadmin /var/www/html/phpmyadmin
 #
 RUN mv /var/www/html/phpmyadmin /var/www/html/convenia
 #
-CMD service nginx start
-CMD service php7.4-fpm start
+RUN service nginx start
+RUN service php7.4-fpm start
 #
 EXPOSE 80
 EXPOSE 443
