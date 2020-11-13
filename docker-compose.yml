@@ -27,10 +27,9 @@ services:
         command: nginx -g "daemon off;"   
         volumes: 
             - ./mounts/myapp/config/nginx/default:/etc/nginx/sites-available/default
-            - ./mounts/myapp/config/phpmyadmin/config-db.php:/etc/phpmyadmin/
             
         links: 
-            - db:web
+            - db:mysql
         depends_on: 
             - db    
         networks: 
