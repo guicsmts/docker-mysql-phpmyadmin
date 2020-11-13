@@ -28,7 +28,7 @@ services:
         volumes: 
             - ./mounts/myapp/config/nginx/default:/etc/nginx/sites-available/default
             - ./mounts/myapp/config/phpmyadmin/config-db.php:/etc/phpmyadmin/
-            - ./mounts/myapp/config/phpmyadmin/config-db.php:/usr/share/phpmyadmin/libraries/
+            
         links: 
             - db:web
         depends_on: 
