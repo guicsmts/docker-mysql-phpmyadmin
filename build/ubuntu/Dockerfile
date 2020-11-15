@@ -23,11 +23,7 @@ RUN mv /var/www/html/phpmyadmin /var/www/html/convenia
 # Renomeando arquivos default (.df) para novos arquivos do volume phpmyadmin
 RUN mv /usr/share/phpmyadmin/libraries/config.default.php /usr/share/phpmyadmin/libraries/config.default.php.df
 RUN mv /etc/phpmyadmin/config-db.php /etc/phpmyadmin/config-db.php.df
-# Configuração de ssl
-COPY ./ssl.sh /etc/nginx/ssl/
-WORKDIR /etc/nginx/ssl/
-RUN chmod +x ssl.sh
-RUN ./ssl.sh 
+
 # Iniciando serviços
 RUN /etc/init.d/nginx start
 RUN /etc/init.d/php7.4-fpm start
