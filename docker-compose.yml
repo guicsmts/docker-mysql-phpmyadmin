@@ -12,7 +12,7 @@ services:
             MYSQL_USER: admin
             MYSQL_PASSWORD: admin
         volumes:
-            - ./mounts/mysql:/var/lib/mysql
+            - ./mounts/volumes/mysql:/var/lib/mysql
         networks: 
             vnet-production:
                 ipv4_address: 172.10.1.10 
@@ -24,18 +24,20 @@ services:
         ports: 
             - "80:80"
             - "443:443"
-        command: nginx -g "daemon off;"   
+        command: nginx -g "daemon off;"  
         volumes: 
-            - ./mounts/myapp/config/nginx/default:/etc/nginx/sites-available/default
-            
+            - ./mounts/myapp/config/nginx/config/default:/etc/nginx/sites-available/default 
+            - ./mounts/myapp/config/phpmyadmin/config/config.default.php:/usr/share/phpmyadmin/libraries/config.default.php
+            - ./mounts/myapp/config/phpmyadmin/config/config-db.php:/etc/phpmyadmin/config-db.php
+            - ./mounts/myapp/config/nginx/logs/access/access.log:/var/log/nginx/access.log
+            - ./mounts/myapp/config/nginx/logs/error/error.log:/var/log/nginx/error.log
         links: 
             - db:mysql
         depends_on: 
             - db    
         networks: 
             vnet-production:
-                ipv4_address: 172.10.1.20    
-                  
+                ipv4_address: 172.10.1.20                      
 networks: 
     vnet-production:
         driver: bridge
