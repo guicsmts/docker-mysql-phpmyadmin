@@ -14,6 +14,7 @@ services:
         volumes:
             - ./mounts/volumes/mysql:/var/lib/mysql
             - ./mounts/myapp/config/mysql/config/mysqld.cnf:/etc/mysql/mysql.conf.d/mysqld.cnf
+            - ./mounts/myapp/config/mysql/config/logs/error.log:/var/log/mysql/error.log
         networks: 
             vnet-production:
                 ipv4_address: 172.10.1.10 
