@@ -7,10 +7,10 @@ services:
         ports: 
             - "3306:3306"    
         environment: 
-            MYSQL_DATABASE: 9c34c5c45c35c23c44c523c45c234
-            MYSQL_ROOT_PASSWORD: 3423424%%sda%%dN    
+            MYSQL_DATABASE: 9c34c5c45c35c23c44c523c45c234  
+            MYSQL_ROOT_PASSWORD: 3423424%%sda%%dN
             MYSQL_USER: admin
-            MYSQL_PASSWORD: admin
+            MYSQL_PASSWORD: d41d8cd98f00b204e9800998ecf8427e
         volumes:
             - ./mounts/volumes/mysql:/var/lib/mysql
         networks: 
